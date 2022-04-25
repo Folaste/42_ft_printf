@@ -6,23 +6,22 @@
 /*   By: fleblanc <fleblanc@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 12:02:18 by fleblanc          #+#    #+#             */
-/*   Updated: 2022/04/22 11:57:43 by fleblanc         ###   ########.fr       */
+/*   Updated: 2022/04/23 18:59:06 by fleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_printf	*ft_return_value_s(t_printf *tab)
+void	ft_return_value_s(t_printf *tab)
 {
 	tab->tot_len -= 2;
 	if (tab->dot == 1 || tab->zero == 1 || tab->minus == 1 || tab->space == 1)
 		tab->tot_len -= 1;
 	if (tab->width != 0 || tab->zero == 1)
 		tab->tot_len -= ft_intlen(tab->width);
-	return (tab);
 }
 
-t_printf	*ft_printf_string_dot(t_printf *tab, char *str, int index)
+void	ft_printf_string_dot(t_printf *tab, char *str, int index)
 {
 	int	width;
 
@@ -34,10 +33,9 @@ t_printf	*ft_printf_string_dot(t_printf *tab, char *str, int index)
 		index++;
 		width--;
 	}
-	return (tab);
 }
 
-t_printf	*ft_printf_string_width(t_printf *tab, char *str, int index)
+void	ft_printf_string_width(t_printf *tab, char *str, int index)
 {
 	index = tab->width - (int)ft_strlen(str);
 	tab->tot_len += tab->width;
@@ -47,10 +45,9 @@ t_printf	*ft_printf_string_width(t_printf *tab, char *str, int index)
 		index--;
 	}
 	ft_putstr_fd(str, 1);
-	return (tab);
 }
 
-t_printf	*ft_printf_string_minus(t_printf *tab, char *str, int index)
+void	ft_printf_string_minus(t_printf *tab, char *str, int index)
 {
 	index = tab->width - (int)ft_strlen(str);
 	tab->tot_len += tab->width;
@@ -60,7 +57,6 @@ t_printf	*ft_printf_string_minus(t_printf *tab, char *str, int index)
 		ft_putchar_fd(' ', 1);
 		index--;
 	}
-	return (tab);
 }
 
 int	ft_printf_string(t_printf *tab, int i)
@@ -73,18 +69,18 @@ int	ft_printf_string(t_printf *tab, int i)
 	if (!str)
 		tab->tot_len += write(1, "(null)", 6);
 	else if (tab->dot == 1 && tab->width < (int)ft_strlen(str))
-		tab = ft_printf_string_dot(tab, str, index);
+		ft_printf_string_dot(tab, str, index);
 	else if (tab->minus == 1 && tab->width > (int)ft_strlen(str))
-		tab = ft_printf_string_width(tab, str, index);
+		ft_printf_string_minus(tab, str, index);
 	else if ((tab->space == 1 || tab->count_flags == 0)
 		&& tab->width > (int)ft_strlen(str))
-		tab = ft_printf_string_width(tab, str, index);
+		ft_printf_string_width(tab, str, index);
 	else
 	{
 		ft_putstr_fd(str, 1);
 		tab->tot_len += ft_strlen(str);
 	}
-	tab = ft_return_value_s(tab);
+	ft_return_value_s(tab);
 	i++;
 	return (i);
 }

@@ -6,7 +6,7 @@
 #    By: fleblanc <fleblanc@student.42angoulem      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 17:34:55 by fleblanc          #+#    #+#              #
-#    Updated: 2022/04/21 18:01:28 by fleblanc         ###   ########.fr        #
+#    Updated: 2022/04/25 12:09:37 by fleblanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,15 @@ SRCS		= ft_printf.c \
 			  ft_init_struct.c \
 			  ft_check_args.c \
 			  ft_printf_char.c \
-			  ft_printf_string.c
+			  ft_printf_string.c \
+			  ft_printf_pointer.c \
+			  ft_printf_pointer_utils.c \
+			  ft_printf_hexa.c \
+			  ft_printf_hexa_utils.c \
+			  ft_printf_unsigned.c \
+			  ft_printf_unsigned_utils.c \
+			  ft_printf_number.c \
+			  ft_printf_number_utils.c
 
 OBJS		= ${SRCS:.c=.o}
 

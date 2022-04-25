@@ -6,7 +6,7 @@
 /*   By: fleblanc <fleblanc@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 16:54:33 by fleblanc          #+#    #+#             */
-/*   Updated: 2022/04/21 17:37:56 by fleblanc         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:30:37 by fleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_check_flags(t_printf *tab, const char *format, int i)
 		}
 		i++;
 	}
-	tab = ft_count_flags(tab);
+	ft_count_flags(tab);
 	i = ft_check_cast(tab, format, i);
 	return (i);
 }
@@ -47,6 +47,14 @@ int	ft_check_cast(t_printf *tab, const char *format, int i)
 		i = ft_printf_char(tab, i);
 	else if (format[i] == 's')
 		i = ft_printf_string(tab, i);
+	else if (format[i] == 'p')
+		i = ft_printf_pointer(tab, i);
+	else if (format[i] == 'x' || format[i] == 'X')
+		i = ft_printf_hexa(tab, i, format[i]);
+	else if (format[i] == 'u')
+		i = ft_printf_unsigned(tab, i);
+	else if (format[i] == 'd' || format[i] == 'i')
+		i = ft_printf_number(tab, i);
 	else if (format[i] == '%')
 	{
 		ft_putchar_fd('%', 1);
@@ -55,9 +63,3 @@ int	ft_check_cast(t_printf *tab, const char *format, int i)
 	}
 	return (i);
 }
-/*	if (format[i] == 'd' || format[i] == 'i')
-**	if (format[i] == 'u')
-**	if (format[i] == 'p')
-**	if (format[i] == 'x')
-**	if (format[i] == 'X') Le mettre dans la condition sup ?
-*/

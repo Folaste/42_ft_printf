@@ -6,13 +6,13 @@
 /*   By: fleblanc <fleblanc@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 14:44:56 by fleblanc          #+#    #+#             */
-/*   Updated: 2022/04/21 18:06:16 by fleblanc         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:35:03 by fleblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_printf	*ft_init_tab(t_printf *tab)
+void	ft_init_tab(t_printf *tab)
 {
 	tab->dot = 0;
 	tab->zero = 0;
@@ -23,10 +23,9 @@ t_printf	*ft_init_tab(t_printf *tab)
 	tab->tot_len = 0;
 	tab->width = 0;
 	tab->count_flags = 0;
-	return (tab);
 }
 
-t_printf	*ft_reset_tab(t_printf *tab)
+void	ft_reset_tab(t_printf *tab)
 {
 	tab->dot = 0;
 	tab->zero = 0;
@@ -36,10 +35,9 @@ t_printf	*ft_reset_tab(t_printf *tab)
 	tab->hash = 0;
 	tab->width = 0;
 	tab->count_flags = 0;
-	return (tab);
 }
 
-t_printf	*ft_count_flags(t_printf *tab)
+void	ft_count_flags(t_printf *tab)
 {
 	if (tab->dot == 1)
 		tab->count_flags += 1;
@@ -53,5 +51,4 @@ t_printf	*ft_count_flags(t_printf *tab)
 		tab->count_flags += 1;
 	if (tab->hash == 1)
 		tab->count_flags += 1;
-	return (tab);
 }
